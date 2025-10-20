@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { db } from '../firebase/firestore';
+import { storage } from '../firebase/config';
 import { doc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const AddArticle = () => {
   const [title, setTitle] = useState('');
@@ -8,17 +10,24 @@ const AddArticle = () => {
   const [slug, setSlug] = useState('');
   const [date, setDate] = useState('');
   const [excerpt, setExcerpt] = useState('');
+  const [image, setImage] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Upload image to Firebase Storage
+      const storageRef = ref(storage, `articles/${image.name}`);
+      await uploadBytes(storageRef, image);
+      const imageUrl = await getDownloadURL(storageRef);
+
       await setDoc(doc(db, 'articles', slug), {
         title,
         content,
         slug,
         date,
         excerpt,
+        imageUrl,
         likes: 0,
         commentCount: 0,
       });
@@ -28,6 +37,7 @@ const AddArticle = () => {
       setSlug('');
       setDate('');
       setExcerpt('');
+      setImage(null);
 
       alert('Article added successfully!');
     } catch (error) {
@@ -75,6 +85,18 @@ const AddArticle = () => {
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
+            Image
+          </label>
+          <input
+            type="file"
+            id="image"
+            onChange={(e) => setImage(e.target.files[0])}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
