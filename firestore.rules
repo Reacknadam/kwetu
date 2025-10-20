@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Replace 'YOUR_ADMIN_UID' with your actual Firebase user UID
+    function isAdmin() {
+      return request.auth.uid == 'YOUR_ADMIN_UID';
+    }
+
+    match /articles/{articleId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /articles/{articleId}/comments/{commentId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['author', 'text'])
+                      && request.resource.data.author is string
+                      && request.resource.data.text is string;
+    }
+  }
+}
