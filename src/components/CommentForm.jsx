@@ -24,51 +24,52 @@ const CommentForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
       <form onSubmit={handleSubmit}>
-        <h3 className="text-xl font-bold mb-4">Leave a Comment</h3>
+        <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">Laisser un commentaire</h3>
         {!user && (
           <div className="mb-4">
             <label htmlFor="author" className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
-              Name
+              Nom
             </label>
             <input
               type="text"
               id="author"
               value={author}
               onChange={(e) => setAuthor(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
           </div>
         )}
         <div className="mb-4">
           <label htmlFor="text" className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
-            Comment
+            Commentaire
           </label>
           <textarea
             id="text"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow-inner appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-300 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            rows="4"
             required
           />
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="bg-kwetu-purple-600 hover:bg-kwetu-purple-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300"
         >
-          Submit
+          Envoyer
         </button>
       </form>
       {!user && (
-        <div className="mt-4">
-          <p>Or</p>
+        <div className="mt-4 text-center">
+          <p className="text-gray-600 dark:text-gray-400">ou</p>
           <button
             onClick={handleGoogleSignIn}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            className="mt-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold py-2 px-4 rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-300"
           >
-            Sign in with Google
+            Se connecter avec Google
           </button>
         </div>
       )}

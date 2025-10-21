@@ -16,25 +16,27 @@ const Article = () => {
   const { comments, addComment } = useComments(slug);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center mt-10">Chargement de l'article...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="text-center mt-10 text-red-500">Erreur: {error.message}</div>;
   }
 
   if (!article) {
-    return <div>Article not found</div>;
+    return <div className="text-center mt-10">Article non trouvé.</div>;
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-8">{article.date}</p>
-      <img src={article.imageUrl} alt={article.title} className="rounded-md mb-8" />
-      <div className="prose dark:prose-dark max-w-none">{article.content}</div>
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">{article.title}</h1>
+      <p className="text-gray-500 dark:text-gray-400 mb-8">{article.date}</p>
+      <img src={article.imageUrl} alt={article.title} className="w-full rounded-lg shadow-lg mb-8" />
+      <article className="prose lg:prose-xl dark:prose-invert max-w-none">
+        {article.content}
+      </article>
       <AdBanner />
-      <div className="flex justify-between items-center mt-8">
+      <div className="flex justify-between items-center mt-8 py-4 border-t border-b border-gray-200 dark:border-gray-700">
         <LikeButton likes={likes} onClick={likeArticle} />
         <ShareButtons article={article} />
       </div>
