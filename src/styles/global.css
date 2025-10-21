@@ -1,0 +1,62 @@
+/* src/styles/global.css */
+
+/* Import the Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  /* Light Theme Colors */
+  --color-background-light: #ffffff;
+  --color-text-light: #222222;
+  --color-accent-light: #0056b3;
+
+  /* Dark Theme Colors */
+  --color-background-dark: #121212;
+  --color-text-dark: #e4e4e4;
+  --color-accent-dark: #4dabf7;
+
+  /* Font Families */
+  --font-sans: 'Inter', sans-serif;
+
+  /* Typography */
+  --font-size-base: 18px;
+  --line-height-base: 1.6;
+
+  /* Spacing */
+  --spacing-unit: 8px;
+  --container-width: 1200px;
+}
+
+/* Default to light theme */
+body {
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Dark theme styles */
+body.dark {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
+}
+
+/* Basic link styling */
+a {
+  color: var(--color-accent-light);
+  text-decoration: none;
+}
+
+body.dark a {
+  color: var(--color-accent-dark);
+}
+
+/* Responsive container */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--spacing-unit) * 2);
+}

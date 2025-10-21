@@ -1,11 +1,16 @@
-import React from 'react';
+import styles from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 mt-12">
-      <div className="container mx-auto px-4 py-6 text-center text-gray-600 dark:text-gray-400">
-        <p>&copy; {new Date().getFullYear()} Kwetu. Tous droits réservés.</p>
-        <p>Portail des informaticiens de Kananga.</p>
+    <footer className={styles.footer}>
+      <div className="container">
+        <div className={styles.links}>
+          <a href="/social">Social</a>
+          <a href="/newsletter">Newsletter</a>
+        </div>
+        <div className={styles.copy}>
+          &copy; {new Date().getFullYear()} Kwetu. All rights reserved.
+        </div>
       </div>
     </footer>
   );
