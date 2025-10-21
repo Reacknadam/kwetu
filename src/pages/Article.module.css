@@ -2,49 +2,215 @@
 .container {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.header {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.publishedInfo {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.excerpt {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.heroFigure {
+  margin: 2.5rem 0;
+  text-align: center;
 }
 
 .heroImage {
   width: 100%;
+  height: auto;
   border-radius: var(--border-radius);
-  margin: 2rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: block;
 }
 
-.actions {
+.imageCaption {
+  margin-top: 0.75rem;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.actionsBar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin: 2.5rem 0;
 }
 
 .likeButton {
-  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.55rem 1.25rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 1rem;
+}
+
+.likeButton:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.shareGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.shareGroup span {
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.shareBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+}
+
+.shareBtn:hover {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
 }
 
 .content {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.8;
+  color: var(--text-color);
+  margin-bottom: 2.5rem;
 }
 
-.content h2 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+.content h2,
+.content h3 {
+  margin: 2.25rem 0 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .content p {
   margin-bottom: 1.5rem;
 }
 
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  margin: 1.5rem 0;
+}
+
 .adPlaceholder {
   width: 100%;
-  min-height: 100px;
-  background-color: var(--border-color);
-  margin: 2rem 0;
+  min-height: 90px;
+  background-color: var(--card-bg);
+  margin: 2.5rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--text-color);
+  color: var(--text-muted);
   font-style: italic;
+  border: 1px dashed var(--border-color);
   border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.articleFooter {
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--border-color);
+  margin-bottom: 2.5rem;
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.errorCard {
+  background: var(--card-bg);
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.errorCard h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.errorCard p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.9rem;
+  }
+
+  .actionsBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+  }
 }

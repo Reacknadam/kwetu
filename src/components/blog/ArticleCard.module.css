@@ -1,16 +1,19 @@
 /* src/components/blog/ArticleCard.module.css */
 .card {
   background-color: var(--card-bg);
-  border-radius: var(--border-radius);
+  /* border-radius: var(--border-radius); → SUPPRIMÉ */
   box-shadow: 0 4px 12px var(--shadow-color);
   overflow: hidden;
   text-decoration: none;
   color: var(--text-color);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
   box-shadow: 0 8px 24px var(--shadow-color);
 }
 
@@ -18,18 +21,31 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+  /* Pas de border-radius */
 }
 
 .content {
   padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
 .title {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 1.25rem;
+  font-weight: 700;
 }
 
 .excerpt {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
 }

@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kwetu - Portail des informaticiens de Kananga</title>
+    <title>Kwetu - Portail de communication</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script>
+      // Précharger le thème pour éviter le flash
+      const isDark = localStorage.getItem('darkMode') === 'true';
+      if (isDark) document.documentElement.classList.add('dark');
+    </script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"

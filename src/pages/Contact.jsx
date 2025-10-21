@@ -31,7 +31,7 @@ const Contact = () => {
       setEmail('');
       setMessage('');
     } catch (err) {
-      setError('Failed to send message. Please try again.');
+      setError('Échec de l’envoi. Veuillez réessayer plus tard.');
     } finally {
       setSubmitting(false);
     }
@@ -39,26 +39,74 @@ const Contact = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Contact Us</h1>
-      {success && <p className={styles.success}>Your message has been sent successfully!</p>}
-      {error && <p className={styles.error}>{error}</p>}
+      <div className={styles.header}>
+        <h1>Nous contacter</h1>
+        <p className={styles.subtitle}>
+          Vous avez une information à partager, une question ou une suggestion ?<br />
+          Chez <strong>Kwetu, notre média</strong>, chaque voix compte.
+        </p>
+      </div>
+
+      {success && (
+        <div className={`${styles.alert} ${styles.alertSuccess}`}>
+          ✅ Votre message a été envoyé avec succès. Nous le traiterons dans les plus brefs délais.
+        </div>
+      )}
+      {error && (
+        <div className={`${styles.alert} ${styles.alertError}`}>
+          ❌ {error}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+          <label htmlFor="name">Nom complet</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder="Ex. : Marie Tshibangu"
+          />
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label htmlFor="email">Adresse e-mail</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="votre@email.com"
+          />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="message">Message</label>
-          <textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} required />
+          <textarea
+            id="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+            placeholder="Partagez votre témoignage, alerte ou suggestion…"
+          />
         </div>
-        <button type="submit" disabled={submitting}>
-          {submitting ? 'Sending...' : 'Send Message'}
+        <button type="submit" disabled={submitting} className={styles.submitButton}>
+          {submitting ? 'Envoi en cours…' : 'Envoyer'}
         </button>
       </form>
+
+      <div className={styles.infoBox}>
+        <h3>Coordonnées officielles</h3>
+        <div className={styles.contactItem}>
+          <span className={styles.iconEmail}></span>
+          <span>israelntalu328@gmail.com</span>
+        </div>
+        <div className={styles.contactItem}>
+          <span className={styles.iconLocation}></span>
+          <span>Kananga, République Démocratique du Congo</span>
+        </div>
+      </div>
     </div>
   );
 };

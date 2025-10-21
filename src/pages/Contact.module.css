@@ -2,10 +2,50 @@
 .container {
   max-width: 800px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 2.5rem;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 12px var(--shadow-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-color);
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.alertSuccess {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.alertError {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+  border: 1px solid #dc3545;
 }
 
 .form {
@@ -21,54 +61,148 @@
 
 .formGroup label {
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--text-color);
+  font-size: 1rem;
 }
 
 .formGroup input,
 .formGroup textarea {
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-main);
-  transition: border-color var(--transition-speed) ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
   border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
 }
 
 .formGroup textarea {
-  min-height: 150px;
+  min-height: 160px;
   resize: vertical;
 }
 
-button {
+.submitButton {
   padding: 1rem;
   background-color: var(--accent-color);
-  color: #fff;
+  color: white;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  transition: opacity var(--transition-speed) ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-button:disabled {
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.submitButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
-.success {
-  color: green;
-  margin-bottom: 1rem;
+.infoBox {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
-.error {
-  color: red;
+.infoBox h3 {
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
   margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Custom Icons (Pure CSS) */
+.iconEmail,
+.iconLocation {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  flex-shrink: 0;
+  top: 2px;
+}
+
+/* Email Icon: envelope */
+.iconEmail::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 14px;
+  border: 2px solid var(--text-muted);
+  border-radius: 3px;
+}
+
+.iconEmail::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  width: 16px;
+  height: 8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--text-muted);
+}
+
+/* Location Icon: pin */
+.iconLocation::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--text-muted);
+  border-radius: 50% 50% 50% 0;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.iconLocation::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background-color: var(--text-muted);
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.75rem;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+  }
 }
