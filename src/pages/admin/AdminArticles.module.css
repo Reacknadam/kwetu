@@ -1,0 +1,51 @@
+/* src/pages/admin/AdminArticles.module.css */
+.container {
+  padding: 2rem;
+}
+
+.editorContainer {
+  margin-top: 2rem;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-family: var(--font-main);
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.checkboxGroup {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.button {
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}

@@ -1,47 +1,48 @@
-import { useState, useEffect } from 'react';
-import { db } from '../firebase/firestore';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+// src/hooks/useLikes.js
+import { useState } from 'react';
+import { db } from '../firebase/config';
+import { collection, addDoc, getDocs, query, where, serverTimestamp, deleteDoc, doc } from 'firebase/firestore';
 
-const useLikes = (articleId) => {
-  const [likes, setLikes] = useState(0);
-  const [liked, setLiked] = useState(false);
+export const useLikes = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getLikes = async () => {
-      const docRef = doc(db, 'articles', articleId);
-      const docSnap = await getDoc(docRef);
+  const likesCollection = collection(db, 'likes');
 
-      if (docSnap.exists()) {
-        setLikes(docSnap.data().likes);
-      }
-    };
-
-    getLikes();
-
-    const likedArticles = JSON.parse(localStorage.getItem('likedArticles')) || [];
-    if (likedArticles.includes(articleId)) {
-      setLiked(true);
+  const getLikes = async (articleSlug) => {
+    setLoading(true);
+    try {
+      const q = query(likesCollection, where('articleSlug', '==', articleSlug));
+      const querySnapshot = await getDocs(q);
+      setLoading(false);
+      return querySnapshot.size; // Return the count of likes
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+      return 0;
     }
-  }, [articleId]);
-
-  const likeArticle = async () => {
-    if (liked) {
-      return;
-    }
-
-    const docRef = doc(db, 'articles', articleId);
-    await updateDoc(docRef, {
-      likes: likes + 1,
-    });
-
-    setLikes(likes + 1);
-    setLiked(true);
-
-    const likedArticles = JSON.parse(localStorage.getItem('likedArticles')) || [];
-    localStorage.setItem('likedArticles', JSON.stringify([...likedArticles, articleId]));
   };
 
-  return { likes, likeArticle };
-};
+  const addLike = async (articleSlug, userId) => {
+    setLoading(true);
+    try {
+      // Check if the user has already liked the article
+      const q = query(likesCollection, where('articleSlug', '==', articleSlug), where('uid', '==', userId));
+      const querySnapshot = await getDocs(q);
 
-export default useLikes;
+      if (querySnapshot.empty) {
+        await addDoc(likesCollection, {
+          articleSlug,
+          uid: userId,
+          createdAt: serverTimestamp(),
+        });
+      }
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  return { loading, error, getLikes, addLike };
+};

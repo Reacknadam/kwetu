@@ -1,0 +1,38 @@
+/* src/pages/admin/AdminLogin.module.css */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.loginBox {
+  padding: 3rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  text-align: center;
+}
+
+.loginBox h1 {
+  margin-bottom: 1rem;
+}
+
+.loginBox p {
+  margin-bottom: 2rem;
+}
+
+.loginBox button {
+  padding: 1rem 2rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity var(--transition-speed) ease;
+}
+
+.loginBox button:hover {
+  opacity: 0.9;
+}

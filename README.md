@@ -1,37 +1,55 @@
-# My Blog
+# Kwetu - A Modern Media Blog
 
-This is a blog built with React, Vite, TailwindCSS, and Firebase.
+Kwetu is a modern, elegant, and premium blog platform built with React, Vite, and Firebase. It is designed to mimic the aesthetic of professional news media sites like The Guardian and Radio Okapi, with a focus on clean design, performance, and a complete admin dashboard for content management.
 
-## Setup
+## Features
 
-1.  Clone the repository.
-2.  Install the dependencies:
-    ```bash
-    npm install
-    ```
-3.  Create a `.env` file and copy the contents of `.env.example`.
-4.  Fill in the `.env` file with your Firebase project's configuration.
-5.  Log in to Firebase:
-    ```bash
-    firebase login
-    ```
-6.  Initialize Firebase in your project:
-    ```bash
-    firebase init hosting firestore
-    ```
+- **Premium Design**: Mobile-first, responsive design with a focus on typography, generous spacing, and a clean aesthetic.
+- **Light/Dark Theme**: Auto-detects system preference with a manual toggle.
+- **Complete Admin Dashboard**: Full CRUD for articles, comment moderation, contact message management, and newsletter subscriber list.
+- **Firebase Integration**: Uses Firestore for the database, Firebase Authentication for admin login, and Firebase Storage for image uploads.
+- **SEO Optimized**: Dynamic meta tags for articles using `@dr.pogodin/react-helmet`.
+- **Monetization Ready**: Placeholders for Google AdSense ads.
 
-## Development
+## Tech Stack
 
-To start the development server, run:
+- **Frontend**: React 18, Vite 5
+- **Backend**: Firebase (Firestore, Authentication, Storage, Hosting)
+- **Styling**: Pure CSS with CSS Modules
+- **Routing**: React Router
+- **Rich Text Editor**: Quill.js (to be implemented)
+- **Charts**: Chart.js (to be implemented)
 
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd kwetu
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Configure Firebase
+- Create a `.env` file in the root of the project by copying the example file:
+```bash
+cp .env.example .env
+```
+- Open the `.env` file and replace the placeholder values with your actual Firebase project configuration. You can find these in your Firebase project settings.
+
+### 4. Run the Development Server
 ```bash
 npm run dev
 ```
+The application will be available at `http://localhost:5173`.
 
-## Deployment
-
-To deploy the blog to Firebase Hosting, run:
-
+### 5. Deploy to Firebase
+To deploy the application to Firebase Hosting, run the following command:
 ```bash
 npm run deploy
 ```
+This will build the project and deploy the `dist` directory to Firebase Hosting.
