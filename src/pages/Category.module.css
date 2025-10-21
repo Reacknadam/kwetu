@@ -1,26 +1,13 @@
-/* src/pages/Home.module.css */
+/* src/pages/Category.module.css */
 .container {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 2rem;
 }
 
-.hero {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.mainContent {
-  display: flex;
-}
-
 .articlesGrid {
-  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
-}
-
-.error {
-  color: red;
+  margin-top: 2rem;
 }

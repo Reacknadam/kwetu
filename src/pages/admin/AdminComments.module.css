@@ -1,0 +1,36 @@
+/* src/pages/admin/AdminComments.module.css */
+.container {
+  padding: 2rem;
+}
+
+.commentList {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.commentItem {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border-left: 5px solid orange;
+}
+
+.commentItem.approved {
+  border-left-color: green;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.actions button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+}

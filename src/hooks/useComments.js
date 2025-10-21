@@ -1,34 +1,68 @@
-import { useState, useEffect } from 'react';
-import { db } from '../firebase/firestore';
-import { collection, getDocs, addDoc, doc, updateDoc, increment } from 'firebase/firestore';
+// src/hooks/useComments.js
+import { useState } from 'react';
+import { db } from '../firebase/config';
+import { collection, addDoc, getDocs, query, where, serverTimestamp, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
-const useComments = (articleId) => {
-  const [comments, setComments] = useState([]);
+export const useComments = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getComments = async () => {
-      const querySnapshot = await getDocs(collection(db, 'articles', articleId, 'comments'));
-      const commentsData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setComments(commentsData);
-    };
+  const commentsCollection = collection(db, 'comments');
 
-    getComments();
-  }, [articleId]);
-
-  const addComment = async (comment) => {
-    const docRef = await addDoc(collection(db, 'articles', articleId, 'comments'), comment);
-    setComments([...comments, { id: docRef.id, ...comment }]);
-
-    const articleRef = doc(db, 'articles', articleId);
-    await updateDoc(articleRef, {
-      commentCount: increment(1),
-    });
+  const getComments = async (articleSlug) => {
+    setLoading(true);
+    try {
+      const q = query(commentsCollection, where('articleSlug', '==', articleSlug));
+      const querySnapshot = await getDocs(q);
+      const comments = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setLoading(false);
+      return comments;
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+      return [];
+    }
   };
 
-  return { comments, addComment };
-};
+  const getAllComments = async () => {
+    setLoading(true);
+    try {
+      const querySnapshot = await getDocs(commentsCollection);
+      const comments = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setLoading(false);
+      return comments;
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+      return [];
+    }
+  };
 
-export default useComments;
+  const addComment = async (articleSlug, commentData) => {
+    setLoading(true);
+    try {
+      await addDoc(commentsCollection, {
+        ...commentData,
+        articleSlug,
+        approved: false, // Comments require approval
+        createdAt: serverTimestamp(),
+      });
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  const approveComment = async (id) => {
+    const docRef = doc(db, 'comments', id);
+    await updateDoc(docRef, { approved: true });
+  };
+
+  const deleteComment = async (id) => {
+    const docRef = doc(db, 'comments', id);
+    await deleteDoc(docRef);
+  };
+
+  return { loading, error, getComments, getAllComments, addComment, approveComment, deleteComment };
+};

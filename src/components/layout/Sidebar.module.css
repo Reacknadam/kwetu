@@ -1,0 +1,39 @@
+/* src/components/layout/Sidebar.module.css */
+.sidebar {
+  width: 300px;
+  padding-left: 2rem;
+}
+
+.widget {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.widget h4 {
+  margin-bottom: 1rem;
+}
+
+.widget ul {
+  list-style: none;
+}
+
+.widget ul li {
+  margin-bottom: 0.5rem;
+}
+
+.widget input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.widget button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+}

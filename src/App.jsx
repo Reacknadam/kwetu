@@ -1,50 +1,77 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MainLayout from './components/MainLayout';
-import AdminLayout from './components/AdminLayout';
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from '@dr.pogodin/react-helmet';
+import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
-// Public pages
+// Import Layouts
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import AdminLayout from './components/admin/AdminLayout';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+
+// Import Pages
 import Home from './pages/Home';
 import Article from './pages/Article';
 import Category from './pages/Category';
 import Search from './pages/Search';
 import Contact from './pages/Contact';
 
-// Admin pages
+// Import Admin Pages
+import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminArticles from './pages/admin/AdminArticles';
 import AdminContacts from './pages/admin/AdminContacts';
 import AdminComments from './pages/admin/AdminComments';
-import AdminAnalytics from './pages/admin/AdminAnalytics';
 import AdminNewsletter from './pages/admin/AdminNewsletter';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: 'article/:slug', element: <Article /> },
-      { path: 'category/:category', element: <Category /> },
-      { path: 'search', element: <Search /> },
-      { path: 'contact', element: <Contact /> },
-    ],
-  },
-  {
-    path: '/admin',
-    element: <AdminLayout />,
-    children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: 'articles', element: <AdminArticles /> },
-      { path: 'contacts', element: <AdminContacts /> },
-      { path: 'comments', element: <AdminComments /> },
-      { path: 'analytics', element: <AdminAnalytics /> },
-      { path: 'newsletter', element: <AdminNewsletter /> },
-    ],
-  },
-]);
-
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <HelmetProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/*" element={<MainLayout />} />
+
+              {/* Admin Routes */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+              <Route path="analytics" element={<AdminDashboard />} />
+                <Route path="articles" element={<AdminArticles />} />
+                <Route path="contacts" element={<AdminContacts />} />
+                <Route path="comments" element={<AdminComments />} />
+                <Route path="newsletter" element={<AdminNewsletter />} />
+              </Route>
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
+    </HelmetProvider>
+  );
 }
+
+// Helper component for main layout to avoid duplicating header/footer
+const MainLayout = () => (
+  <div className="app-container">
+    <Header />
+    <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/article/:slug" element={<Article />} />
+        <Route path="/category/:category" element={<Category />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </main>
+    <Footer />
+  </div>
+);
 
 export default App;
