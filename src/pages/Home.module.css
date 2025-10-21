@@ -1,0 +1,28 @@
+/* src/pages/Home.module.css */
+.latestArticles {
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-accent-light);
+  padding-bottom: 0.5rem;
+}
+
+body.dark .latestArticles {
+  border-bottom-color: var(--color-accent-dark);
+}
+
+.articleGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .articleGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .articleGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
